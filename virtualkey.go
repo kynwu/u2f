@@ -147,6 +147,7 @@ func (vk *VirtualKey) HandleRegisterRequest(req WebRegisterRequest) (*RegisterRe
 	publicKey := privateKey.PublicKey
 
 	keyHandle := fmt.Sprintf("virtualkey-%d", len(vk.keys))
+	fmt.Println(keyHandle)
 
 	rr := RegisterResponse{}
 
