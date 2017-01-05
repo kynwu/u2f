@@ -53,7 +53,7 @@ type RegisteredKey struct {
 	Version   string `json:"version"`
 	KeyHandle string `json:"keyHandle"`
 	AppID     string `json:"appId"`
-}
+}	
 
 // WebSignRequest contains the parameters needed for the u2f.sign()
 // high-level Javascript API function as defined by the
