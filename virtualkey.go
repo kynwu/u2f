@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"math/big"
 	"time"
+	"log"
 )
 
 // Virtual U2F key
@@ -157,8 +158,9 @@ func (vk *VirtualKey) HandleRegisterRequest(req WebRegisterRequest) (*RegisterRe
 		Challenge: req.RegisterRequests[0].Challenge,
 	}
 
-	cdJson, _ := json.Marshal(cd)
-	rr.ClientData = encodeBase64(cdJson)
+	cdJson, _ := json.Marshal(cd) // Object to json byte
+	log.Printf("cdJson: %+v", cd)
+	rr.ClientData = encodeBase64(cdJson) // byte to string
 
 	// Generate registration response message
 	var buf []byte

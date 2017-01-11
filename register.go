@@ -13,6 +13,8 @@ import (
 	"encoding/asn1"
 	"errors"
 	"time"
+	"log"
+	"encoding/hex"
 )
 
 // Registration represents a single enrolment or pairing between an
@@ -96,11 +98,14 @@ func parseRegistration(buf []byte) (*Registration, []byte, error) {
 		return nil, nil, errors.New("u2f: invalid reserved byte")
 	}
 	buf = buf[1:]
-
+	log.Printf("public key: %+v", hex.EncodeToString(buf[:65]))
 	x, y := elliptic.Unmarshal(elliptic.P256(), buf[:65])
 	if x == nil {
 		return nil, nil, errors.New("u2f: invalid public key")
 	}
+	log.Printf("x: %+v", hex.EncodeToString(x.Bytes()))
+	log.Printf("y: %+v", hex.EncodeToString(y.Bytes()))
+
 	r.PubKey.Curve = elliptic.P256()
 	r.PubKey.X = x
 	r.PubKey.Y = y
